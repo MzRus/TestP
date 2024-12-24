@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Курс: Петров Андрей Николаевич</title>
+    <link rel="icon" href="./img/favicon.ico" type="image/x-icon">
+    <style>
+        .options input[type="checkbox"], .options input[type="radio"] {
+            accent-color: #007bff; /* Задает цвет чекбокса и радио-кнопки */
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e6edf2; /* Светло-голубо-серый фон всего документа */
+        }
+
+        /* Шапка сайта */
+		.header {
+			display: flex;
+			align-items: center;
+			justify-content: flex-start;
+			background-color: #ffffff; /* Белый фон шапки */
+			height: 50px; /* Высота шапки */
+			padding: 0 20px; /* Отступы слева и справа */
+			position: fixed; /* Закрепляем шапку */
+			top: 0; /* Располагаем у верхней границы */
+			left: 0; /* Располагаем у левой границы */
+			right: 0; /* Простираем шапку на всю ширину */
+			z-index: 1000; /* Обеспечиваем, что шапка всегда сверху */
+			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Добавляем легкую тень */
+		}
+		.user-info {
+			font-size: 14px; /* Уменьшенный размер шрифта */
+			color: #333;
+			text-align: right; /* Выравнивание по правому краю */
+			flex-grow: 1; /* Занять оставшееся пространство */
+		}
+
+		.username {
+			font-weight: ;
+			color: ; /* Цвет выделенного имени */
+		}
+
+        .header img {
+            height: 40px; /* Уменьшена высота картинки */
+        }
+
+        .background-container {
+            background-color: #e3e3e3; /* Светло-голубо-серый фон за всем содержимым */
+            padding: 80px 0; /* Отступы сверху и снизу */
+        }
+
+        .main-container {
+            background-color: #ffffff; /* Белый фон для всех вопросов */
+            margin: 20px auto;
+            max-width: 1300px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .question-container {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 10px; /* Уменьшено расстояние между контейнерами */
+        }
+
+        .question-number {
+            display: inline-block;
+            background-color: #eeeeee; /* Сероватый фон номера вопроса */
+            color: #003366;
+            font-weight: bold;
+            padding: 10px 15px;
+            border-radius: 4px;
+            border: 1px solid #dcdcdc; /* Черная обводка */
+            text-align: left; /* Выровнять текст по левому краю */
+            margin-right: 10px; /* Уменьшенный отступ справа от номера вопроса */
+            font-size: 14px; /* Размер текста в контейнере */
+            width: 90px; /* Установить фиксированную ширину для контейнера номера */
+        }
+
+		.flag-icon {
+			width: 16px; /* Установите ширину флага */
+			height: 16px; /* Установите высоту флага */
+			margin-right: 2px; /* Отступ справа от изображения */
+			vertical-align: middle; /* Выравнивание по центру текста */
+		}
+
+        .question-number .main, 
+        .question-number .number {
+            display: inline; /* Элементы в одном ряду */
+            margin: 0; /* Убираем отступы */
+        }
+
+        .question-number .main {
+            font-size: 12px; /* Уменьшенный размер для слова "Вопрос" */
+        }
+
+        .question-number .number {
+            font-size: 18px; /* Увеличенный размер для цифры */
+            margin-left: 5px; /* Отступ слева между словом "Вопрос" и номером */
+        }
+
+        .question-number .additional {
+            font-size: 10.5px; /* Текст на 1 пункт меньше, чем "Вопрос" */
+            margin-top: 10px; /* Отступ сверху для разделения текста */
+            line-height: 1.5; /* Межстрочный интервал */
+        }
+
+        .question-text-container {
+            flex-grow: 1;
+            background-color: #d9edf7; /* Голубой фон текста вопроса */
+            border-radius: 4px;
+            border: 1px solid #bce8f1; /* Голубая обводка, чуть ярче фона */
+            padding: 15px;
+            width: calc(100% - 90px); /* Уменьшено на 10px (за счет уменьшения отступа) */
+        }
+
+        .question-text {
+            margin: 0 0 10px 0;
+            font-size: 16px;
+            color: #003366; /* Темно-синий цвет текста */
+        }
+
+        .options {
+            list-style: none;
+            padding: 0;
+        }
+
+        .options li {
+            margin-bottom: 10px;
+        }
+
+        .options input {
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Шапка сайта -->
+    <header class="header">
+        <img src="./img/nspu_title.jpg" alt="Логотип"> <!-- Картинка слева -->
+		 <div class="user-info">
+        Вы зашли под именем <span class="username">ФИО</span>
+		</div>
+    </header>
+
+    <div class="background-container">
+        <div class="main-container">
+            <!-- Вопросы отсортированы от А до Я -->
+
+            <!-- 1 вопрос -->
+            <div class="question-container">
+                <div class="question-number">
+                    <div class="main">Вопрос</div>
+                    <div class="number">1</div>
+                    <div class="additional">
+                        Пока нет ответа<br>
+						<br>
+                        Балл: 1,00<br>
+						<br>
+                        <img src="./img/flag.png" alt="Флаг" class="flag-icon"> Отметить вопрос
+                    </div>
+                </div>
+                <div class="question-text-container">
+                    <div class="question-text">
+                        Аппаратные средства подразделяют на
+						<br>
+						<br>
+						<br>
+						Выберите один или несколько вариантов ответа:
+                    </div>
+                    <ul class="options">
+                        <li><label><input type="checkbox"> a. Механические устройства</label></li> 
+                        <li><label><input type="checkbox" checked> b. Программные средства</label></li> 
+                        <li><label><input type="checkbox"> c. Сетевые технологии</label></li>
+                        <li><label><input type="checkbox" checked> d. средства вычислительной техники</label></li> 
+                        <li><label><input type="checkbox" checked> e. средства коммуникационной техники</label></li>
+                    </ul>
+                </div>
+            </div>
+			
+			<!-- 2 вопрос -->
+            <div class="question-container">
+                <div class="question-number">
+                    <div class="main">Вопрос</div>
+                    <div class="number">2</div>
+                    <div class="additional">
+                        Пока нет ответа<br>
+						<br>
+                        Балл: 1,00<br>
+						<br>
+                        <img src="./img/flag.png" alt="Флаг" class="flag-icon">Отметить вопрос
+                    </div>
+                </div>
+                <div class="question-text-container">
+                    <div class="question-text">
+                         Диаграммы компонентов
+						 <br>
+						 <br>
+						 <br>
+						 Выберите один ответ:
+                    </div>
+                    <ul class="options">
+                        <li><input type="radio" name="option"> a. Отображают типы объектов, взаимодействующих при исполнении прецедентов, сообщения, котрое они посылают друг другу, и любые возвращаемые значения, ассоциированные с этими сообщениями</li>
+                        <li><input type="radio" name="option"> b. Описывают функциональность ИС</li>
+                        <li><input type="radio" name="option" checked> c. Позволяет изобразить модель системы на физическом уровне</li>
+                        <li><input type="radio" name="option"> d. Позволяет описать  систему  в статическом состоянии - определить типы объектов системы  и различного рода статические связи между ними</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 3 вопрос -->
+            <div class="question-container">
+                <div class="question-number">
+                    <div class="main">Вопрос</div>
+                    <div class="number">3</div>
+                    <div class="additional">
+                        Пока нет ответа<br>
+						<br>
+                        Балл: 1,00<br>
+						<br>
+                        <img src="./img/flag.png" alt="Флаг" class="flag-icon">Отметить вопрос
+                    </div>
+                </div>
+                <div class="question-text-container">
+                    <div class="question-text">
+                        Диаграммы состояний
+						<br>
+						<br>
+						<br>
+						Выберите один ответ:
+                    </div>
+                    <ul class="options">
+                        <li><label><input type="radio" name="option3" checked> a. Определяют все возможные состояния, в которых может находится объект, а также процесс смены состояний объекта в результате некоторых событий</label></li> 
+                        <li><label><input type="radio" name="option3"> b. Описывают функциональность ИС</label></li>
+                        <li><label><input type="radio" name="option3"> c. Позволяет изобразить модель системы на физическом уровне</label></li> 
+                        <li><label><input type="radio" name="option3"> d. Позволяет описать  систему  в статическом состоянии - определить типы объектов системы  и различного рода статические связи между ними</label></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 4 вопрос -->
+            <div class="question-container">
+                <div class="question-number">
+                    <div class="main">Вопрос</div>
+                    <div class="number">4</div>
+                    <div class="additional">
+                        Пока нет ответа<br>
+						<br>
+                        Балл: 1,00<br>
+						<br>
+                        <img src="./img/flag.png" alt="Флаг" class="flag-icon">Отметить вопрос
+                    </div>
+                </div>
+                <div class="question-text-container">
+                    <div class="question-text">
+                        Жизненный цикл программного продукта включает
+						<br>
+						<br>
+						<br>
+						Выберите один или несколько вариантов ответа:
+                    </div>
+                    <ul class="options">
+                        <li><label><input type="checkbox" checked> a. Отладку</label></li>
+                        <li><label><input type="checkbox" checked> b. Разработку спецификаций</label></li>
+                        <li><label><input type="checkbox" checked> c. Проектирование</label></li>
+                        <li><label><input type="checkbox" checked> d. Анализ требований</label></li>
+                        <li><label><input type="checkbox" checked> e. Написание исходного текста</label></li>
+                        <li><label><input type="checkbox" checked> f. Маркетирование</label></li>
+                        <li><label><input type="checkbox"> g. Утилизацию</label></li>
+                        <li><label><input type="checkbox" checked> h. Тестирование и сопровождение</label></li>
+                        <li><label><input type="checkbox" checked> i. Документирование</label></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 5 вопрос -->
+            <div class="question-container">
+                <div class="question-number">
+                    <div class="main">Вопрос</div>
+                    <div class="number">5</div>
+                    <div class="additional">
+                        Пока нет ответа<br>
+						<br>
+                        Балл: 1,00<br>
+						<br>
+                        <img src="./img/flag.png" alt="Флаг" class="flag-icon">Отметить вопрос
+                    </div>
+                </div>
+                <div class="question-text-container">
+                    <div class="question-text">
+                        Классическое устройство ЭВМ включает в себя
+						<br>
+						<br>
+						<br>
+						Выберите один или несколько вариантов ответа:
+                    </div>
+                    <ul class="options">
+                        <li><label><input type="checkbox" checked> a. центральный процессор</label></li> 
+                        <li><label><input type="checkbox" checked> b. запоминающее устройство</label></li> 
+                        <li><label><input type="checkbox"> c. видеокарта</label></li>
+                        <li><label><input type="checkbox" checked> d. устройства вывода</label></li> 
+                        <li><label><input type="checkbox"> e. сетевая карта</label></li>
+                        <li><label><input type="checkbox"> f. звуковая карта</label></li>
+                        <li><label><input type="checkbox" checked> g. устройство ввода</label></li> 
+                        <li><label><input type="checkbox" checked> h. устройства управления</label></li> 
+                    </ul>
+                </div> 
+            </div>
+            <!-- 6 вопрос -->
+            <div class="question-container">
+                <div class="question-number">
+                    <div class="main">Вопрос</div>
+                    <div class="number">6</div>
+                    <div class="additional">
+                        Пока нет ответа<br>
+						<br>
+                        Балл: 1,00<br>
+						<br>
+                        <img src="./img/flag.png" alt="Флаг" class="flag-icon">Отметить вопрос
+                    </div>
+                </div>
+                <div class="question-text-container">
+                    <div class="question-text">
+                      Набор инструментов, определяющий возможности, предоставляемые системой коллективу разработчиков
+						<br>
+						<br>
+						<br>
+						Выберите один ответ:
+                    </div>
+                    <ul class="options">
+                        <li><label><input type="radio" name="option6" checked> a. Инструментарий</label></li> 
+                        <li><label><input type="radio" name="option6"> b. Системы контроля версий</label></li>
+                        <li><label><input type="radio" name="option6"> c. Интегрированные среды разработки</label></li> 
+                    </ul>
+                </div>
+            </div>
+            <!-- 7 вопрос -->
+            <div class="question-container">
+                <div class="question-number">
+                    <div class="main">Вопрос</div>
+                    <div class="number">7</div>
+                    <div class="additional">
+                        Пока нет ответа<br>
+						<br>
+                        Балл: 1,00<br>
+						<br>
+                        <img src="./img/flag.png" alt="Флаг" class="flag-icon">Отметить вопрос
+                    </div>
+                </div>
+                <div class="question-text-container">
+                    <div class="question-text">
+                        Наноядро выполняет
+						<br>
+						<br>
+						<br>
+						Выберите один ответ:
+                    </div>
+                    <ul class="options">
+                        <li><label><input type="radio" name="option7" checked> a. обработку аппаратных прерываний, генерируемых устройствами компьютера элементарные функции управления процессами и минимальный набор абстракций для работы с оборудованием</label></li> 
+                        <li><label><input type="radio" name="option7"> b. набор сервисов для взаимодействия между приложениями, а также необходимый минимум функций, связанных с защитой: выделение и высвобождение ресурсов, контроль прав доступа и т. д.</label></li>
+                        <li><label><input type="radio" name="option7"> c. функции модифицированного микроядра, позволяющие для ускорения работы запускать "несущественные" части в пространстве ядра</label></li>
+                        <li><label><input type="radio" name="option7"> d. набор абстракций оборудования работающих в одном адресном пространстве</label></li>
+                        <li><label><input type="radio" name="option7"> e. тот или иной механизм подгрузки модулей, поддерживающих то или иное аппаратное обеспечение (например, драйверов)</label></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 8 вопрос -->
+            <div class="question-container">
+                <div class="question-number">
+                    <div class="main">Вопрос</div>
+                    <div class="number">8</div>
+                    <div class="additional">
+                        Пока нет ответа<br>
+						<br>
+                        Балл: 1,00<br>
+						<br>
+                        <img src="./img/flag.png" alt="Флаг" class="flag-icon">Отметить вопрос
+                    </div>
+                </div>
+                <div class="question-text-container">
+                    <div class="question-text">
+                        Обычно среда разработки включает в себя
+						<br>
+						<br>
+						<br>
+						Выберите один или несколько вариантов ответа:
+                    </div>
+                    <ul class="options">
+                        <li><label><input type="checkbox" checked> a. текстовый редактор</label></li> 
+                        <li><label><input type="checkbox" checked> b. компилятор и/или интерпретатор</label></li> 
+                        <li><label><input type="checkbox"> c. окно просмотра программных классов</label></li>
+                        <li><label><input type="checkbox" checked> d. средства автоматизации сборки</label></li> 
+                        <li><label><input type="checkbox"> e. диаграмма иерархии классов</label></li>
+                        <li><label><input type="checkbox" checked> f. отладчик</label></li> 
+                    </ul>
+                </div>
+            </div>
+            <!-- 9 вопрос -->
+            <div class="question-container">
+                <div class="question-number">
+                    <div class="main">Вопрос</div>
+                    <div class="number">9</div>
+                    <div class="additional">
+                        Пока нет ответа<br>
+						<br>
+                        Балл: 1,00<br>
+						<br>
+                        <img src="./img/flag.png" alt="Флаг" class="flag-icon">Отметить вопрос
+                    </div>
+                </div>
+                <div class="question-text-container">
+                    <div class="question-text">
+                       Относительное сокращение разнообразия элементов по сравнению с разнообразием систем называют
+						<br>
+						<br>
+						<br>
+						Выберите один ответ:
+                    </div>
+                    <ul class="options">
+                        <li><label><input type="radio" name="option9"> a. Оптимизация</label></li>
+                        <li><label><input type="radio" name="option9"> b. Стандартизация</label></li>
+                        <li><label><input type="radio" name="option9" checked> c. Унификация</label></li> 
+                    </ul>
+                </div>
+            </div>
+            <!-- 10 вопрос -->
+            <div class="question-container">
+                <div class="question-number">
+                    <div class="main">Вопрос</div>
+                    <div class="number">10</div>
+                    <div class="additional">
+                        Пока нет ответа<br>
+						<br>
+                        Балл: 1,00<br>
+						<br>
+                        <img src="./img/flag.png" alt="Флаг" class="flag-icon">Отметить вопрос
+                    </div>
+                </div>
+                <div class="question-text-container">
+                    <div class="question-text">
+                        Подготовительный этап технологического процесса обработки информации включает в себя
+						<br>
+						<br>
+						<br>
+						Выберите один или несколько вариантов ответа:
+                    </div>
+                    <ul class="options">
+                        <li><label><input type="checkbox"> a. Вывод результатной информации</label></li> 
+                        <li><label><input type="checkbox" checked> b. Регистрацию информации</label></li> 
+                        <li><label><input type="checkbox"> c. Поиск информации</label></li>
+                        <li><label><input type="checkbox" checked> d. Контроль правильности исходных данных</label></li> 
+                        <li><label><input type="checkbox"> e. Передача результатов потребителю</label></li>
+                        <li><label><input type="checkbox"> f. Контроль правильности результатов</label></li>
+                        <li><label><input type="checkbox"> g. Хранение информации</label></li>
+                        <li><label><input type="checkbox"> h. Использование результатов данных</label></li>
+                        <li><label><input type="checkbox" checked> i. Ввод информации в ПК или передачу данных в центр обарьотки</label></li> 
+                        <li><label><input type="checkbox" checked> j. Сбор исходных данных</label></li> 
+                        <li><label><input type="checkbox"> k. Обработка информации</label></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 11 вопрос -->
+            <div class="question-container">
+                <div class="question-number">
+                    <div class="main">Вопрос</div>
+                    <div class="number">11</div>
+                    <div class="additional">
+                        Пока нет ответа<br>
+						<br>
+                        Балл: 1,00<br>
+						<br>
+                        <img src="./img/flag.png" alt="Флаг" class="flag-icon">Отметить вопрос
+                    </div>
+                </div>
+                <div class="question-text-container">
+                    <div class="question-text">
+                         Полное копирование базы данных
+						<br>
+						<br>
+						<br>
+						Выберите один ответ:
+                    </div>
+                    <ul class="options">
+                        <li><label><input type="radio" name="option11"> a. Позволяет копировать указанные файлы без данных вместо копирования всей базы данных</label></li>
+                        <li><label><input type="radio" name="option11"> b. Учитывает только изменения, записанные в протокол транзакций</label></li>
+                        <li><label><input type="radio" name="option11" checked> c. Создается резервная копия всей базы данных целиком, она включает в себя схему всех таблиц, соответствующие файловые структуры, а также содержит все данные из этой базы на момент завершения резервного копирования</label></li>
+                        <li><label><input type="radio" name="option11"> d. Создаётся копия только частей баз данных, которые менячлись с момента последнего полного копирования</label></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 12 вопрос -->
+            <div class="question-container">
+                <div class="question-number">
+                    <div class="main">Вопрос</div>
+                    <div class="number">12</div>
+                    <div class="additional">
+                        Пока нет ответа<br>
+						<br>
+                        Балл: 1,00<br>
+						<br>
+                        <img src="./img/flag.png" alt="Флаг" class="flag-icon">Отметить вопрос
+                    </div>
+                </div>
+                <div class="question-text-container">
+                    <div class="question-text">
+                       Программы, которые используются в ходе разработки, корректировки или развития других прикладных или системных программ, называют
+						<br>
+						<br>
+						<br>
+						Выберите один ответ:
+                    </div>
+                    <ul class="options">
+                        <li><label><input type="radio" name="option12"> a. Системными программами</label></li>
+                        <li><label><input type="radio" name="option12"> b. Прикладными программами</label></li>
+                        <li><label><input type="radio" name="option12" checked> c. Инструментальными программными средствами</label></li> 
+                    </ul>
+                </div> 
+            </div>
+            <!-- 13 вопрос -->
+            <div class="question-container">
+                <div class="question-number">
+                    <div class="main">Вопрос</div>
+                    <div class="number">13</div>
+                    <div class="additional">
+                        Пока нет ответа<br>
+						<br>
+                        Балл: 1,00<br>
+						<br>
+                        <img src="./img/flag.png" alt="Флаг" class="flag-icon">Отметить вопрос
+                    </div>
+                </div>
+                <div class="question-text-container">
+                    <div class="question-text">
+                        Программный модуль позволяющий, каждом модуле определить и связать ссылка на неопределённые имена, называют
+						<br>
+						<br>
+						<br>
+						Выберите один ответ:
+                    </div>
+                    <ul class="options">
+                        <li><label><input type="radio" name="option13"> a. Компилятор</label></li>
+                        <li><label><input type="radio" name="option13"> b. Интерпретатор</label></li>
+                        <li><label><input type="radio" name="option13" checked> c. Компоновщик</label></li> 
+                    </ul>
+                </div>
+            </div>
+            <!-- 14 вопрос -->
+            <div class="question-container">
+                <div class="question-number">
+                    <div class="main">Вопрос</div>
+                    <div class="number">14</div>
+                    <div class="additional">
+                        Пока нет ответа<br>
+						<br>
+                        Балл: 1,00<br>
+						<br>
+                        <img src="./img/flag.png" alt="Флаг" class="flag-icon">Отметить вопрос
+                    </div>
+                </div>
+                <div class="question-text-container">
+                    <div class="question-text">
+                      Резервное копирование протокола транзакций
+						<br>
+						<br>
+						<br>
+						Выберите один ответ:
+                    </div>
+                    <ul class="options">
+                        <li><label><input type="radio" name="option14" checked> a. Учитывает только изменения, записанные в протокол транзакций</label></li> 
+                        <li><label><input type="radio" name="option14"> b. Полное резервное копирование</label></li>
+                        <li><label><input type="radio" name="option14"> c. Копирование журнала транзакций</label></li> 
+                    </ul>
+                </div>
+            </div>
+            <!-- 15 вопрос -->
+            <div class="question-container">
+                <div class="question-number">
+                    <div class="main">Вопрос</div>
+                    <div class="number">1</div>
+                    <div class="additional">
+                        Пока нет ответа<br>
+						<br>
+                        Балл: 1,00<br>
+						<br>
+                        <img src="./img/flag.png" alt="Флаг" class="flag-icon">Отметить вопрос
+                    </div>
+                </div>
+                <div class="question-text-container">
+                    <div class="question-text">
+                        Современная система программирования состоит из следующих компонентов
+						<br>
+						<br>
+						<br>
+						Выберите один или несколько вариантов ответа:
+                    </div>
+                    <ul class="options">
+                        <li><label><input type="checkbox" checked> a. компилятор</label></li>  
+                        <li><label><input type="checkbox" checked> b. интегрированная среда разработчика программ</label></li> 
+                        <li><label><input type="checkbox" checked> c. отладчик</label></li> 
+                        <li><label><input type="checkbox" checked> d. средства оптимизации кода программ</label></li> 
+                        <li><label><input type="checkbox" checked> e. набор библиотек (возможно, с исходными текстами программ)</label></li> 
+                        <li><label><input type="checkbox" checked> f. редактор связей</label></li> 
+                        <li><label><input type="checkbox" checked> g. сервисные средства (утилиты) для работы с библиотеками, текстовыми и двоич ными файлами</label></li> 
+                        <li><label><input type="checkbox" checked> h. справочные системы</label></li> 
+                        <li><label><input type="checkbox" checked> i. документатор исходного кода программы</label></li> 
+                        <li><label><input type="checkbox" checked> j. система поддержки и управления проектом программного комплекса</label></li> 
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 16 вопрос -->
+            <div class="question-container">
+                <div class="question-number">
+                    <div class="main">Вопрос</div>
+                    <div class="number">2</div>
+                    <div class="additional">
+                        Пока нет ответа<br>
+						<br>
+                        Балл: 1,00<br>
+						<br>
+                        <img src="./img/flag.png" alt="Флаг" class="flag-icon">Отметить вопрос
+                    </div>
+                </div>
+                <div class="question-text-container">
+                    <div class="question-text">
+                        Технический проект автоматизированной системы включает в себя
+						<br>
+						<br>
+						<br>
+						Выберите один или несколько вариантов ответа:
+                    </div>
+                    <ul class="options">
+                        <li><label><input type="checkbox" checked> a. разработка проектных решений по системе и ее частям</label></li> 
+                        <li><label><input type="checkbox" checked> b. разработка документации на АС и ее части</label></li> 
+                        <li><label><input type="checkbox" checked> c. разработка и оформление документации на поставку изделий для комплектования АС 
+и/или технических требований (технических заданий) на их разработку</label></li>
+						<li><label><input type="checkbox" checked> d. разработка заданий на проектирование в смежных частях проекта объекта автоматизации</label></li>
+						<li><label><input type="checkbox"> e. экономическую эффективность автоматизированной системы управления</label></li>
+						<li><label><input type="checkbox"> f. комплекс научно-исследовательских и экспериментальных работ</label></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 17 вопрос -->
+            <div class="question-container">
+                <div class="question-number">
+                    <div class="main">Вопрос</div>
+                    <div class="number">3</div>
+                    <div class="additional">
+                        Пока нет ответа<br>
+						<br>
+                        Балл: 1,00<br>
+						<br>
+                        <img src="./img/flag.png" alt="Флаг" class="flag-icon">Отметить вопрос
+                    </div>
+                </div>
+                <div class="question-text-container">
+                    <div class="question-text">
+                        Укажите иерархию структурированной архитектуры ядра ОС
+						<br>
+						<br>
+						<br>
+						Выберите один или несколько вариантов ответа:
+                    </div>
+                    <ul class="options">
+                        <li><label><input type="checkbox" checked> a. 1) Главная программа</label></li> 
+                        <li><label><input type="checkbox" checked> b. 2) Сервисные процедуры</label></li> 
+                        <li><label><input type="checkbox" checked> c. 3) Утилиты</label></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 18 вопрос -->
+            <div class="question-container">
+                <div class="question-number">
+                    <div class="main">Вопрос</div>
+                    <div class="number">4</div>
+                    <div class="additional">
+                        Пока нет ответа<br>
+						<br>
+                        Балл: 1,00<br>
+						<br>
+                        <img src="./img/flag.png" alt="Флаг" class="flag-icon">Отметить вопрос
+                    </div>
+                </div>
+                <div class="question-text-container">
+                    <div class="question-text">
+                        Укажите многопрограммные (многозадачные) операционные системы
+						<br>
+						<br>
+						<br>
+						Выберите один или несколько вариантов ответа:
+                    </div>
+                    <ul class="options">
+                        <li><label><input type="checkbox"> a. fedora</label></li> 
+                        <li><label><input type="checkbox"> b. macOS</label></li> 
+                        <li><label><input type="checkbox" checked> c. Windows</label></li>
+                        <li><label><input type="checkbox"> d. debain</label></li> 
+                        <li><label><input type="checkbox"> e. DOS</label></li>
+						<li><label><input type="checkbox" checked> f. unix</label></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 19 вопрос -->
+            <div class="question-container">
+                <div class="question-number">
+                    <div class="main">Вопрос</div>
+                    <div class="number">5</div>
+                    <div class="additional">
+                        Пока нет ответа<br>
+						<br>
+                        Балл: 1,00<br>
+						<br>
+                        <img src="./img/flag.png" alt="Флаг" class="flag-icon">Отметить вопрос
+                    </div>
+                </div>
+                <div class="question-text-container">
+                    <div class="question-text">
+                        Укажите операционные системы
+						<br>
+						<br>
+						<br>
+						Выберите один или несколько вариантов ответа:
+                    </div>
+                    <ul class="options">
+                        <li><label><input type="checkbox" checked> a. fedora</label></li> 
+                        <li><label><input type="checkbox" checked> b. macOS</label></li> 
+                        <li><label><input type="checkbox" checked> c. Windows</label></li>
+                        <li><label><input type="checkbox" checked> d. debain</label></li> 
+                        <li><label><input type="checkbox"> e. DOS</label></li>
+						<li><label><input type="checkbox"> f. Linux</label></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 20 вопрос -->
+            <div class="question-container">
+                <div class="question-number">
+                    <div class="main">Вопрос</div>
+                    <div class="number">6</div>
+                    <div class="additional">
+                        Пока нет ответа<br>
+						<br>
+                        Балл: 1,00<br>
+						<br>
+                        <img src="./img/flag.png" alt="Флаг" class="flag-icon">Отметить вопрос
+                    </div>
+                </div>
+                <div class="question-text-container">
+                    <div class="question-text">
+                        Укажите причины потери информационных данных
+						<br>
+						<br>
+						<br>
+						Выберите один или несколько вариантов ответа:
+                    </div>
+                    <ul class="options">
+                        <li><label><input type="checkbox" checked> a. Программные ошибки</label></li> 
+                        <li><label><input type="checkbox" checked> b. Ошибки администратора</label></li> 
+                        <li><label><input type="checkbox" checked> c. Выход из строя компьютера</label></li>
+                        <li><label><input type="checkbox" checked> d. Отказ дискового накопителя</label></li> 
+                        <li><label><input type="checkbox" checked> f. Катастрофы или кража</label></li>
+                    </ul>
+                </div>
+            </div>
+
+			<!-- 21 вопрос -->
+            <div class="question-container">
+                <div class="question-number">
+                    <div class="main">Вопрос</div>
+                    <div class="number">7</div>
+                    <div class="additional">
+                        Пока нет ответа<br>
+						<br>
+                        Балл: 1,00<br>
+						<br>
+                        <img src="./img/flag.png" alt="Флаг" class="flag-icon">Отметить вопрос
+                    </div>
+                </div>
+                <div class="question-text-container">
+                    <div class="question-text">
+                        Языки программирования, которые отражают структуру конкретного типа компьютера (ассемблеры)
+						<br>
+						<br>
+						<br>
+						Выберите один ответ:
+                    </div>
+                    <ul class="options">
+                        <li><input type="radio" name="option21"> a. Процедурно-ориентированные языке</li>
+                        <li><input type="radio" name="option21"> b. Интегрированные системы программирования</li>
+                        <li><input type="radio" name="option21"> c. Машинные языки</li>
+						<li><input type="radio" name="option21" checked> d. Машинно-ориентированные языки</li>
+						<li><input type="radio" name="option21"> e. Алгоритмические языки</li>
+                    </ul>
+                </div>
+            </div>
+
+			<!-- 22 вопрос -->
+            <div class="question-container">
+                <div class="question-number">
+                    <div class="main">Вопрос</div>
+                    <div class="number">8</div>
+                    <div class="additional">
+                        Пока нет ответа<br>
+						<br>
+                        Балл: 1,00<br>
+						<br>
+                        <img src="./img/flag.png" alt="Флаг" class="flag-icon">Отметить вопрос
+                    </div>
+                </div>
+                <div class="question-text-container">
+                    <div class="question-text">
+                        Язык программирования Fortran создан
+						<br>
+						<br>
+						<br>
+						Выберите один ответ:
+                    </div>
+                    <ul class="options">
+                        <li><input type="radio" name="option22"> a. 1968</li>
+                        <li><input type="radio" name="option22"> b. 1958</li>
+                        <li><input type="radio" name="option22"> c. 1960</li>
+						<li><input type="radio" name="option22" checked> d. 1954</li>
+                    </ul>
+                </div>
+            </div>
+
+			<!-- 23 вопрос -->
+            <div class="question-container">
+                <div class="question-number">
+                    <div class="main">Вопрос</div>
+                    <div class="number">9</div>
+                    <div class="additional">
+                        Пока нет ответа<br>
+						<br>
+                        Балл: 1,00<br>
+						<br>
+                        <img src="./img/flag.png" alt="Флаг" class="flag-icon">Отметить вопрос
+                    </div>
+                </div>
+                <div class="question-text-container">
+                    <div class="question-text">
+                        Язык программирования Java создан
+						<br>
+						<br>
+						<br>
+						Выберите один ответ:
+                    </div>
+                    <ul class="options">
+                        <li><input type="radio" name="option23"> a. 1992</li>
+                        <li><input type="radio" name="option23"> b. 1978</li>
+                        <li><input type="radio" name="option23"> c. 1988</li>
+						<li><input type="radio" name="option23" checked> d. 1990</li>
+                    </ul>
+                </div>
+            </div>
+
+
+			<!-- 24 вопрос -->
+            <div class="question-container">
+                <div class="question-number">
+                    <div class="main">Вопрос</div>
+                    <div class="number">10</div>
+                    <div class="additional">
+                        Пока нет ответа<br>
+						<br>
+                        Балл: 1,00<br>
+						<br>
+                        <img src="./img/flag.png" alt="Флаг" class="flag-icon">Отметить вопрос
+                    </div>
+                </div>
+                <div class="question-text-container">
+                    <div class="question-text">
+                        Язык программирования PL/1 создан
+						<br>
+						<br>
+						<br>
+						Выберите один ответ:
+                    </div>
+                    <ul class="options">
+                        <li><input type="radio" name="option24"> a. 1958</li>
+                        <li><input type="radio" name="option24"> b. 1972</li>
+                        <li><input type="radio" name="option24" checked> c. 1964</li>
+						<li><input type="radio" name="option24"> d. 1976</li>
+                    </ul>
+                </div>
+            </div>
+
+			<!-- 25 вопрос -->
+            <div class="question-container">
+                <div class="question-number">
+                    <div class="main">Вопрос</div>
+                    <div class="number">11</div>
+                    <div class="additional">
+                        Пока нет ответа<br>
+						<br>
+                        Балл: 1,00<br>
+						<br>
+                        <img src="./img/flag.png" alt="Флаг" class="flag-icon">Отметить вопрос
+                    </div>
+                </div>
+                <div class="question-text-container">
+                    <div class="question-text">
+                        Язык программирования С создан
+						<br>
+						<br>
+						<br>
+						Выберите один ответ:
+                    </div>
+                    <ul class="options">
+                        <li><input type="radio" name="option25" checked> a. 1980</li>
+                        <li><input type="radio" name="option25"> b. 1954</li>
+                        <li><input type="radio" name="option25"> c. 1978</li>
+						<li><input type="radio" name="option25"> d. 1958</li>
+                    </ul>
+                </div>
+            </div>
+			
+			<!-- 26 вопрос -->
+            <div class="question-container">
+                <div class="question-number">
+                    <div class="main">Вопрос</div>
+                    <div class="number">12</div>
+                    <div class="additional">
+                        Пока нет ответа<br>
+						<br>
+                        Балл: 1,00<br>
+						<br>
+                        <img src="./img/flag.png" alt="Флаг" class="flag-icon">Отметить вопрос
+                    </div>
+                </div>
+                <div class="question-text-container">
+                    <div class="question-text">
+                        ISO это
+						<br>
+						<br>
+						<br>
+						Выберите один ответ:
+                    </div>
+                    <ul class="options">
+                        <li><input type="radio" name="option26"> a. Европейский комитет по стандартизации</li>
+                        <li><input type="radio" name="option26"> b. Организация по стандартизации и сертификации</li>
+                        <li><input type="radio" name="option26" checked> c. Международная организация по выпуску стандартов</li>
+                    </ul>
+                </div>
+            </div>
+			
+			<!-- 27 вопрос -->
+            <div class="question-container">
+                <div class="question-number">
+                    <div class="main">Вопрос</div>
+                    <div class="number">13</div>
+                    <div class="additional">
+                        Пока нет ответа<br>
+						<br>
+                        Балл: 1,00<br>
+						<br>
+                        <img src="./img/flag.png" alt="Флаг" class="flag-icon">Отметить вопрос
+                    </div>
+                </div>
+                <div class="question-text-container">
+                    <div class="question-text">
+                         UML  это
+						 <br>
+						 <br>
+						 <br>
+						 Выберите один ответ:
+                    </div>
+                    <ul class="options">
+                        <li><input type="radio" name="option27"> a. Уникальный Язык Макетирования</li>
+                        <li><input type="radio" name="option27" checked> b. Унифицированный Язык Моделирования</li>
+                        <li><input type="radio" name="option27"> c. Объедененная Лаброратория Моделирования</li>
+                    </ul>
+                </div>
+            </div>
+			<!--------->
+        </div>
+    </div>
+
+</body>
+</html>
